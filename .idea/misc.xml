@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.9 (market_analysis_chatbot_IndabaX)" project-jdk-type="Python SDK" />
+=======
+  <component name="Black">
+    <option name="sdkName" value="Python 3.10 (market_analysis_chatbot_IndabaX)" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (market_analysis_chatbot_IndabaX)" project-jdk-type="Python SDK" />
+>>>>>>> 49e5ac7c401f4960de8bf486ba4bc3c6d9fa8fe7
 </project>
