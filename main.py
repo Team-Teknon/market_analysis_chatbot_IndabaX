@@ -1,16 +1,25 @@
-# This is a sample Python script.
+import streamlit as st
+# Bot title
+st.title("IndabaX Bot")
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# React to user input
+prompt = st.chat_input("Type your message here")
+if prompt:
+    # Display user message in chat message container
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    st.session_state.messages.append({"role":"user","content":prompt})
+    response = (f"IndaBot:  "
+                f"{prompt}")
+    with st.chat_message("assistant"):
+        st.markdown(response)
+    st.session_state.messages.append({"role":"assistant","content":response})
