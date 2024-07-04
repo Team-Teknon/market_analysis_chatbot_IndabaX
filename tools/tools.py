@@ -15,9 +15,10 @@ market = MarketView(df)
 #print(df["Item Name"].unique())
 #print(df["City"].unique())
 
+# Example Query: Sales over time for a specific produc
 alyssa_result = trends.sales_over_time('ALYSSA  SPAGHETTI    200G SACHET')
 print("Sales over time for ALYSSA SPAGHETTI: {}".format(alyssa_result))
 
-
+# Example Query: Comparison of sales value between two cities
 compare_result = comparison.compare_sales_value(['Abidjan', 'Bouake'])
 #print("Comparison of sales value: {}".format(compare_result))
