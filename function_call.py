@@ -1,10 +1,12 @@
 import yfinance as yf
+from vertexai.generative_models import ResponseValidationError
 from vertexai.preview.generative_models import (
     FunctionDeclaration,
     GenerativeModel,
     Part,
     Tool,
 )
+
 
 # Function to Get Stock Price
 def get_stock_price(parameters):
@@ -15,6 +17,7 @@ def get_stock_price(parameters):
         return {"price": hist['Close'].iloc[-1]}
     else:
         return {"error": "No data available"}
+
 
 # Tools
 tools = Tool(function_declarations=[
@@ -40,41 +43,49 @@ model = GenerativeModel("gemini-pro",
                         tools=[tools])
 chat = model.start_chat()
 
-# Send a prompt to the chat
-prompt = "What is the stock price of Apple?"
-response = chat.send_message(prompt)
 
-# Check for function call and dispatch accordingly
-function_call = response.candidates[0].content.parts[0].function_call
+def chat_gemini(prompt):
+    # Send a prompt to the chat
+    try:
+        response = chat.send_message(prompt)
 
-# Dispatch table for function handling
-function_handlers = {
-    "get_stock_price": get_stock_price,
-}
+        # Check for function call and dispatch accordingly
+        function_call = response.candidates[0].content.parts[0].function_call
 
-if function_call.name in function_handlers:
-    function_name = function_call.name
+        # Dispatch table for function handling
+        function_handlers = {
+            "get_stock_price": get_stock_price,
+        }
 
-    # Directly extract arguments from function call
-    args = {key: value for key, value in function_call.args.items()}
+        if function_call.name in function_handlers:
+            function_name = function_call.name
 
-    # Call the function with the extracted arguments
-    if args:
-        function_response = function_handlers[function_name](args)
+            # Directly extract arguments from function call
+            args = {key: value for key, value in function_call.args.items()}
 
-        # Sending the function response back to the chat
-        response = chat.send_message(
-            Part.from_function_response(
-                name=function_name,
-                response={
-                    "content": function_response,
-                }
-            ),
-        )
+            # Call the function with the extracted arguments
+            if args:
+                function_response = function_handlers[function_name](args)
 
-        chat_response = response.candidates[0].content.parts[0].text
-        print("Chat Response:", chat_response)
-    else:
-        print("No arguments found for the function.")
-else:
-    print("Chat Response:", response.text)
+                # Sending the function response back to the chat
+                response = chat.send_message(
+                    Part.from_function_response(
+                        name=function_name,
+                        response={
+                            "content": function_response,
+                        }
+                    ),
+                )
+
+                chat_response = response.candidates[0].content.parts[0].text
+                return True, chat_response
+                # print("Chat Response:", chat_response)
+            else:
+                print("No arguments found for the function.")
+        else:
+            return True, response.text
+            # print("Chat Response:", response.text)
+    except ResponseValidationError:
+        return False, "Sorry, the response wasn't valid. Please try again"
+
+
