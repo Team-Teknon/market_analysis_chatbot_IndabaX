@@ -2,6 +2,8 @@ import pandas as pd
 from tools.product_sales_trends import ProductSalesTrends
 from tools.sales_performance_comparison import SalesPerformanceComparison
 from tools.market_view import MarketView
+import yfinance as yf
+from vertexai.generative_models import ResponseValidationError
 from vertexai.preview.generative_models import (
     FunctionDeclaration,
     GenerativeModel,
@@ -33,8 +35,17 @@ def compare_sales_value(parameters):
     result = comparison.compare_sales_value(cities)
     if result is not None:
         return {"comparison": result}
+
+# Function to Get Stock Price
+def get_stock_price(parameters):
+    ticker = parameters['ticker']
+    stock = yf.Ticker(ticker)
+    hist = stock.history(period="1d")
+    if not hist.empty:
+        return {"price": hist['Close'].iloc[-1]}
     else:
         return {"error": "No data available"}
+
 
 # Tools
 tools = Tool(function_declarations=[
@@ -72,52 +83,50 @@ tools = Tool(function_declarations=[
 # Model Initialization
 model = GenerativeModel("gemini-pro",
                         generation_config={"temperature": 0},
-
                         tools=[tools])
 chat = model.start_chat()
 
-# Send a prompt to the chat
-prompt = "Get sales over time for ALYSSA  SPAGHETTI    200G SACHET"
-response = chat.send_message(prompt)
 
-# Check for function call and dispatch accordingly
-if response.candidates:
-    function_call = response.candidates[0].content.parts[0].function_call
+def chat_gemini(prompt):
+    # Send a prompt to the chat
+    try:
+        response = chat.send_message(prompt)
 
-    # Dispatch table for function handling
-    function_handlers = {
-        "get_sales_over_time": get_sales_over_time,
-        "compare_sales_value": compare_sales_value,
-    }
+        # Check for function call and dispatch accordingly
+        function_call = response.candidates[0].content.parts[0].function_call
 
-    if function_call.name in function_handlers:
-        function_name = function_call.name
+        # Dispatch table for function handling
+        function_handlers = {
+            "get_stock_price": get_stock_price,
+        }
 
-        # Directly extract arguments from function call
-        args = {key: value for key, value in function_call.args.items()}
+        if function_call.name in function_handlers:
+            function_name = function_call.name
 
-        # Call the function with the extracted arguments
-        if args:
-            function_response = function_handlers[function_name](args)
+            # Directly extract arguments from function call
+            args = {key: value for key, value in function_call.args.items()}
 
-            # Sending the function response back to the chat
-            response = chat.send_message(
-                Part.from_function_response(
-                    name=function_name,
-                    response={
-                        "content": function_response,
-                    }
-                ),
-            )
+            # Call the function with the extracted arguments
+            if args:
+                function_response = function_handlers[function_name](args)
 
-            # Access the response text
-            if response.candidates and response.candidates[0].content.parts:
-                for part in response.candidates[0].content.parts:
-                    if isinstance(part, Part.text):
-                        chat_response = part.text
-                        print("Chat Response:", chat_response)
-                        break  # Exit the loop after finding the first text part
-                    else:
-                        print(f"Part type: {type(part)}")  # Print the part type for debugging
-                else:
-                    print("No text parts found in response candidates.")
+                # Sending the function response back to the chat
+                response = chat.send_message(
+                    Part.from_function_response(
+                        name=function_name,
+                        response={
+                            "content": function_response,
+                        }
+                    ),
+                )
+
+                chat_response = response.candidates[0].content.parts[0].text
+                return True, chat_response
+                # print("Chat Response:", chat_response)
+            else:
+                print("No arguments found for the function.")
+        else:
+            return True, response.text
+            # print("Chat Response:", response.text)
+    except ResponseValidationError:
+        return False, "Sorry, the response wasn't valid. Please try again"
