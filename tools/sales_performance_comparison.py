@@ -1,6 +1,3 @@
-import pandas as pd
-
-
 class SalesPerformanceComparison:
     """
     A class used to compare sales performance across different cities.
@@ -13,11 +10,8 @@ class SalesPerformanceComparison:
     Methods
     -------
     compare_sales_value(city_list)
-        Returns the sales value comparison across the specified cities.
     compare_sales_volume(city_list)
-        Returns the sales volume comparison across the specified cities.
     compare_unit_price(city_list)
-        Returns the average unit price comparison across the specified cities.
     """
 
     def __init__(self, data):

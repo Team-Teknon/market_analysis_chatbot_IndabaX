@@ -25,6 +25,8 @@ market = MarketView(df)
 def get_sales_over_time(parameters):
     product_name = parameters['product_name']
     result = trends.sales_over_time(product_name)
+    print("Current test")
+    print(result)
     if result is not None:
         result = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in result.items()}
         return {"sales_over_time": result}
@@ -140,6 +142,8 @@ def chat_gemini(prompt):
                         }
                     ),
                 )
+
+                print(response)
 
                 chat_response = response.candidates[0].content.parts[0].text
                 return True, chat_response
