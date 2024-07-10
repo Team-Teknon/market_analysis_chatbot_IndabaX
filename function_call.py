@@ -10,6 +10,7 @@ from vertexai.preview.generative_models import (
     Part,
     Tool,
 )
+import time
 
 # Load the dataset
 df = pd.read_excel('data/dummy_dataset.xlsx', sheet_name='Database')
@@ -18,6 +19,7 @@ df = pd.read_excel('data/dummy_dataset.xlsx', sheet_name='Database')
 trends = ProductSalesTrends(df)
 comparison = SalesPerformanceComparison(df)
 market = MarketView(df)
+
 
 # Function to Get Sales Over Time
 def get_sales_over_time(parameters):
@@ -29,12 +31,14 @@ def get_sales_over_time(parameters):
     else:
         return {"error": "No data available"}
 
+
 # Function to Compare Sales Value Between Cities
 def compare_sales_value(parameters):
     cities = parameters['cities']
     result = comparison.compare_sales_value(cities)
     if result is not None:
         return {"comparison": result}
+
 
 # Function to Get Stock Price
 def get_stock_price(parameters):
@@ -77,8 +81,28 @@ tools = Tool(function_declarations=[
                 }
             }
         },
+    ),
+    FunctionDeclaration(
+        name="get_stock_price",
+        description="Get the current stock price of a given company",
+        parameters={
+            "type": "object",
+            "properties": {
+                "ticker": {
+                    "type": "string",
+                    "description": "Stock ticker symbol"
+                }
+            }
+        },
     )
 ])
+
+# Dispatch table for function handling
+function_handlers = {
+    "get_stock_price": get_stock_price,
+    "compare_sales_value": compare_sales_value,
+    "get_sales_over_time": get_sales_over_time
+}
 
 # Model Initialization
 model = GenerativeModel("gemini-pro",
@@ -95,10 +119,7 @@ def chat_gemini(prompt):
         # Check for function call and dispatch accordingly
         function_call = response.candidates[0].content.parts[0].function_call
 
-        # Dispatch table for function handling
-        function_handlers = {
-            "get_stock_price": get_stock_price,
-        }
+        print(function_call)
 
         if function_call.name in function_handlers:
             function_name = function_call.name

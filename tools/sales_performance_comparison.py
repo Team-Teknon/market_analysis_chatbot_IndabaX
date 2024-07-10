@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 class SalesPerformanceComparison:
     """
     A class used to compare sales performance across different cities.
@@ -18,7 +19,7 @@ class SalesPerformanceComparison:
     compare_unit_price(city_list)
         Returns the average unit price comparison across the specified cities.
     """
-    
+
     def __init__(self, data):
         """
         Constructs all the necessary attributes for the SalesPerformanceComparison object.
@@ -47,7 +48,7 @@ class SalesPerformanceComparison:
         city_data = self.data[self.data['City'].isin(city_list)]
         sales_value_comparison = city_data.groupby(['City', 'Period']).sum()['Sales_Value'].unstack()
         return sales_value_comparison.to_dict()
-    
+
     def compare_sales_volume(self, city_list):
         """
         Returns the sales volume comparison across the specified cities.
@@ -65,7 +66,7 @@ class SalesPerformanceComparison:
         city_data = self.data[self.data['City'].isin(city_list)]
         sales_volume_comparison = city_data.groupby(['City', 'Period']).sum()['Sales_Volume(KG_LTRS)'].unstack()
         return sales_volume_comparison.to_dict()
-    
+
     def compare_unit_price(self, city_list):
         """
         Returns the average unit price comparison across the specified cities.
