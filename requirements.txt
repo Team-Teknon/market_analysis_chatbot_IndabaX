@@ -2,3 +2,4 @@ pandas==2.2.2
 streamlit==1.36.0
 vertexai==1.49.0
 yfinance==0.2.40
+openpyxl==3.1.5
