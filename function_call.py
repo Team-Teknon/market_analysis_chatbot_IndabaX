@@ -2,7 +2,6 @@ import pandas as pd
 from tools.product_sales_trends import ProductSalesTrends
 from tools.sales_performance_comparison import SalesPerformanceComparison
 from tools.market_view import MarketView
-import yfinance as yf
 from vertexai.generative_models import ResponseValidationError
 from vertexai.preview.generative_models import (
     FunctionDeclaration,
@@ -10,15 +9,14 @@ from vertexai.preview.generative_models import (
     Part,
     Tool,
 )
-import time
 
 # Load the dataset
 df = pd.read_excel('data/dummy_dataset.xlsx', sheet_name='Database')
 
 # Create instances of each class
-trends = ProductSalesTrends(df)
-comparison = SalesPerformanceComparison(df)
-market = MarketView(df)
+trends = ProductSalesTrends(df.copy())
+comparison = SalesPerformanceComparison(df.copy())
+market = MarketView(df.copy())
 
 
 # Function to Get Sales Over Time
@@ -46,17 +44,6 @@ def compare_sales_value(parameters):
             converted_result[str_period] = cities_dict
         #print(converted_result)
         return {"comparison": converted_result}
-    else:
-        return {"error": "No data available"}
-
-
-# Function to Get Stock Price
-def get_stock_price(parameters):
-    ticker = parameters['ticker']
-    stock = yf.Ticker(ticker)
-    hist = stock.history(period="1d")
-    if not hist.empty:
-        return {"price": hist['Close'].iloc[-1]}
     else:
         return {"error": "No data available"}
 
@@ -92,24 +79,10 @@ tools = Tool(function_declarations=[
             }
         },
     ),
-    FunctionDeclaration(
-        name="get_stock_price",
-        description="Get the current stock price of a given company",
-        parameters={
-            "type": "object",
-            "properties": {
-                "ticker": {
-                    "type": "string",
-                    "description": "Stock ticker symbol"
-                }
-            }
-        },
-    )
 ])
 
 # Dispatch table for function handling
 function_handlers = {
-    "get_stock_price": get_stock_price,
     "compare_sales_value": compare_sales_value,
     "get_sales_over_time": get_sales_over_time
 }
@@ -163,3 +136,7 @@ def chat_gemini(prompt):
             # print("Chat Response:", response.text)
     except ResponseValidationError:
         return False, "Sorry, the response wasn't valid. Please try again"
+    except AttributeError as e:
+        return False, f"AttributeError occurred: {str(e)}"
+    except Exception as e:
+        return False, f"An unexpected error occurred: {str(e)}"

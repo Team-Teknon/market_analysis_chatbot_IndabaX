@@ -9,9 +9,9 @@ df = pd.read_excel('../data/dummy_dataset.xlsx', sheet_name='Database')
 #print(df.describe())
 
 # Create instances of each class
-trends = ProductSalesTrends(df)
-comparison = SalesPerformanceComparison(df)
-market = MarketView(df)
+trends = ProductSalesTrends(df.copy())
+comparison = SalesPerformanceComparison(df.copy())
+market = MarketView(df.copy())
 
 #print(df["Item Name"].unique())
 #print(df["City"].unique())
@@ -21,5 +21,8 @@ market = MarketView(df)
 #print("Sales over time for ALYSSA SPAGHETTI: {}".format(alyssa_result))
 
 # Example Query: Comparison of sales value between two cities
-compare_result = comparison.compare_sales_value(['Abidjan', 'Bouake'])
-print("Comparison of sales value: {}".format(compare_result))
+#compare_result = comparison.compare_sales_value(['Abidjan', 'Bouake'])
+#print("Comparison of sales value: {}".format(compare_result))
+
+overall_sales_summary = market.overall_sales_summary()
+print(overall_sales_summary)
