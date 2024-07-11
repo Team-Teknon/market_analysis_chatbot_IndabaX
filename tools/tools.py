@@ -6,6 +6,7 @@ from market_view import MarketView
 
 # Load the dataset
 df = pd.read_excel('../data/dummy_dataset.xlsx', sheet_name='Database')
+#print(df.describe())
 
 # Create instances of each class
 trends = ProductSalesTrends(df)
@@ -16,9 +17,9 @@ market = MarketView(df)
 #print(df["City"].unique())
 
 # Example Query: Sales over time for a specific produc
-alyssa_result = trends.sales_over_time('ALYSSA  SPAGHETTI    200G SACHET')
-print("Sales over time for ALYSSA SPAGHETTI: {}".format(alyssa_result))
+#alyssa_result = trends.sales_over_time('ALYSSA  SPAGHETTI    200G SACHET')
+#print("Sales over time for ALYSSA SPAGHETTI: {}".format(alyssa_result))
 
 # Example Query: Comparison of sales value between two cities
 compare_result = comparison.compare_sales_value(['Abidjan', 'Bouake'])
-#print("Comparison of sales value: {}".format(compare_result))
+print("Comparison of sales value: {}".format(compare_result))

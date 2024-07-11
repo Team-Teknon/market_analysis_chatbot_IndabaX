@@ -40,7 +40,8 @@ class SalesPerformanceComparison:
             Sales value comparison across the specified cities.
         """
         city_data = self.data[self.data['City'].isin(city_list)]
-        sales_value_comparison = city_data.groupby(['City', 'Period']).sum()['Sales_Value'].unstack()
+        sales_value_comparison = city_data.groupby(['City', 'Period'])['Sales_Value'].sum().unstack()
+        print(sales_value_comparison.to_dict())
         return sales_value_comparison.to_dict()
 
     def compare_sales_volume(self, city_list):

@@ -26,7 +26,7 @@ def get_sales_over_time(parameters):
     product_name = parameters['product_name']
     result = trends.sales_over_time(product_name)
     print("Current test")
-    print(result)
+    #print(result)
     if result is not None:
         result = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in result.items()}
         return {"sales_over_time": result}
@@ -39,7 +39,15 @@ def compare_sales_value(parameters):
     cities = parameters['cities']
     result = comparison.compare_sales_value(cities)
     if result is not None:
-        return {"comparison": result}
+        # Convert Timestamp keys to string format
+        converted_result = {}
+        for period, cities_dict in result.items():
+            str_period = period.strftime('%Y-%m-%d %H:%M:%S') if isinstance(period, pd.Timestamp) else period
+            converted_result[str_period] = cities_dict
+        #print(converted_result)
+        return {"comparison": converted_result}
+    else:
+        return {"error": "No data available"}
 
 
 # Function to Get Stock Price
