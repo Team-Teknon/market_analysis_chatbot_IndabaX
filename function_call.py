@@ -103,6 +103,15 @@ def overall_sales_summary(parameters):
         return {"overall_sales_summary": overall_summary_converted}
     except Exception as e:
         return {"error": str(e)}
+    
+def top_performing_products(parameters):
+
+    number = parameters['top_n']
+    result = market.top_performing_products(top_n=int(number))
+    if result is not None:
+        return {"top_performing_products": result}
+    else:
+        return {"error": "No data available"}
 
 
 # Tools
@@ -163,7 +172,20 @@ tools = Tool(function_declarations=[
                 }
             }
         },
-    )
+    ),
+    FunctionDeclaration(
+        name="top_performing_products",
+        description="Get top performing products based on sales",
+        parameters={
+            "type": "object",
+            "properties": {
+                "top_n": {
+                    "type": "integer",
+                    "description": "Number of top performing products to return"
+                }
+            }
+        },
+    ),
 ])
 
 # Dispatch table for function handling
@@ -172,6 +194,7 @@ function_handlers = {
     "average_unit_price_over_time": average_unit_price_over_time,
     "get_sales_over_time": get_sales_over_time,
     "overall_sales_summary": overall_sales_summary,
+    "top_performing_products": top_performing_products,
 }
 
 # Model Initialization

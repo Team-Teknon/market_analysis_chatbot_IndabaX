@@ -67,7 +67,15 @@ class MarketView:
         dict
             Top performing products based on sales value.
         """
-        top_products = self.data.groupby('Item Name').sum()['Sales_Value'].nlargest(top_n)
+         # Ensure 'Sales_Value' column is numeric
+        self.data['Sales_Value'] = pd.to_numeric(self.data['Sales_Value'], errors='coerce')
+
+        # Filter out NaN values if any
+        self.data = self.data.dropna(subset=['Sales_Value'])
+
+        # Calculate top performing products
+        top_products = self.data.groupby('Item Name')['Sales_Value'].sum().nlargest(top_n)
+
         return top_products.to_dict()
     
     def market_share_by_category(self):

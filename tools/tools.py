@@ -58,5 +58,11 @@ market = MarketView(df.copy())
 # vol_time = trends.sales_volume_over_time('ALYSSA  SPAGHETTI    200G SACHET')
 # print(vol_time)
 
-avg_unit_price = trends.average_unit_price_over_time('ALYSSA  SPAGHETTI    200G SACHET')
-print(avg_unit_price)
+# avg_unit_price = trends.average_unit_price_over_time('ALYSSA  SPAGHETTI    200G SACHET')
+# print(avg_unit_price)
+
+# trend_by_period = trends.product_sales_trends("ALYSSA  SPAGHETTI    200G SACHET", "custom_month", month="January")
+# print(trend_by_period)
+
+top_perform = market.top_performing_products(top_n=1)
+print(top_perform)

@@ -89,31 +89,7 @@ class ProductSalesTrends:
         average_unit_price_over_time = product_data.groupby('Period')['Unit_Price'].mean()
         return average_unit_price_over_time.to_dict()
 
-    def sales_trends_by_period(self, period):
-        """
-        Calculate sales trends based on the specified period.
-        
-        Args:
-            period (str): The period for which to calculate sales trends. 
-                          Can be 'past_year', 'last_six_months', or 'this_year'.
-        
-        Returns:
-            dict: Sales trends for the specified period.
-        """
-        if period == 'past_year':
-            start_date = datetime.now() - timedelta(days=365)
-        elif period == 'last_six_months':
-            start_date = datetime.now() - timedelta(days=182)
-        elif period == 'this_year':
-            start_date = datetime(datetime.now().year, 1, 1)
-        else:
-            raise ValueError("Invalid period specified. Choose from 'past_year', 'last_six_months', 'this_year'.")
-
-        period_data = self.data[self.data['Period'] >= start_date]
-        sales_trends = period_data.groupby('Period')['Sales_Value'].sum()
-        return sales_trends.to_dict()
-
-    def product_sales_trends(self, product_name, period, month=None):
+    def product_sales_trends_by_period(self, product_name, period, month=None):
         """
         Calculate product sales trends based on the specified period.
         
