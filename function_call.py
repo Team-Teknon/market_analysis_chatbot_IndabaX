@@ -25,11 +25,12 @@ market = MarketView(df.copy())
 def get_sales_over_time(parameters):
     product_name = parameters['product_name']
     result = trends.sales_over_time(transform_data(product_name))
-
-    print(result)
+    # print("Transformed product name:", transform_data(product_name))
+    # print(result)
 
     if result is not None:
         result = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in result.items()}
+        # print(result)
         return {"sales_over_time": result}
     else:
         return {"error": "No data available"}
@@ -39,7 +40,8 @@ def get_sales_over_time(parameters):
 def sales_volume_over_time(parameters):
     product_name = parameters['product_name']
     result = trends.sales_volume_over_time(transform_data(product_name))
-    print(result)
+    # print(result)
+    # print("Product name: ", product_name)
     if result is not None:
         # Convert Timestamp keys to string format
         result = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in result.items()}

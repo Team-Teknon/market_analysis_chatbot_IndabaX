@@ -22,7 +22,7 @@ def load_data():
 
 def transform_data(data):
     if isinstance(data, str):
-        data = data.lower()
+        data = re.sub(r'\s+', ' ', data.lower())
         return data
     # data = data.astype(str)
     data = [entry.lower() for entry in data]
