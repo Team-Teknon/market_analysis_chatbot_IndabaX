@@ -9,9 +9,10 @@ from vertexai.preview.generative_models import (
     Part,
     Tool,
 )
+from utils import *
 
 # Load the dataset
-df = pd.read_excel('data/dummy_dataset.xlsx', sheet_name='Database')
+df = load_data()
 
 # Create instances of each class
 trends = ProductSalesTrends(df.copy())
@@ -23,8 +24,6 @@ market = MarketView(df.copy())
 def get_sales_over_time(parameters):
     product_name = parameters['product_name']
     result = trends.sales_over_time(product_name)
-    print("Current test")
-    #print(result)
     if result is not None:
         result = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in result.items()}
         return {"sales_over_time": result}
@@ -42,7 +41,7 @@ def compare_sales_value(parameters):
         for period, cities_dict in result.items():
             str_period = period.strftime('%Y-%m-%d %H:%M:%S') if isinstance(period, pd.Timestamp) else period
             converted_result[str_period] = cities_dict
-        #print(converted_result)
+        # print(converted_result)
         return {"comparison": converted_result}
     else:
         return {"error": "No data available"}
@@ -97,6 +96,7 @@ chat = model.start_chat()
 def chat_gemini(prompt):
     # Send a prompt to the chat
     try:
+        prompt = transform_data(prompt)
         response = chat.send_message(prompt)
 
         # Check for function call and dispatch accordingly

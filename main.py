@@ -1,6 +1,4 @@
 import streamlit as st
-
-
 from function_call import *
 
 # Bot title
