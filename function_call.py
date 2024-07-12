@@ -96,8 +96,8 @@ chat = model.start_chat()
 def chat_gemini(prompt):
     # Send a prompt to the chat
     try:
-        prompt = transform_data(prompt)
-        response = chat.send_message(prompt)
+        # prompt = transform_data(prompt)  # normalize user prompt to make it easier to process
+        response = chat.send_message(prompt)  # send user prompt to Gemini and receive response
 
         # Check for function call and dispatch accordingly
         function_call = response.candidates[0].content.parts[0].function_call
@@ -108,7 +108,11 @@ def chat_gemini(prompt):
             function_name = function_call.name
 
             # Directly extract arguments from function call
-            args = {key: value for key, value in function_call.args.items()}
+            args = {
+                        key: find_closest_item_cosine(transform_data(value), df[key])
+                        if key in will_transform else value
+                        for key, value in function_call.args.items()
+            }
 
             # Call the function with the extracted arguments
             if args:
