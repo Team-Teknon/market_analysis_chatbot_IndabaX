@@ -78,5 +78,5 @@ source myenv/bin/activate  # On macOS/Linux
 pip install -r requirements.txt
 
 # Step 5: Run the Streamlit app
-streamlit run app.py
+streamlit run main.py
 ```
