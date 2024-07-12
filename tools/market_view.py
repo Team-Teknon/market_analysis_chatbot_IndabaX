@@ -87,5 +87,5 @@ class MarketView:
         dict
             Market share by category.
         """
-        market_share = self.data.groupby('Category').sum()['Sales_Value']
+        market_share = self.data.groupby('Category')['Sales_Value'].sum()
         return market_share.to_dict()

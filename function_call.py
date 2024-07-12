@@ -90,6 +90,17 @@ def compare_sales_value(parameters):
     else:
         return {"error": "No data available"}
     
+def compare_average_unit_price(parameters):
+    cities = parameters['cities']
+    result = comparison.compare_average_unit_price(transform_data(cities))
+    if result is not None:
+        # Convert Timestamp keys to string format
+        converted_result = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in result.items()}
+        # print(converted_result)
+        return {"comparison": converted_result}
+    else:
+        return {"error": "No data available"}
+    
 def overall_sales_summary(parameters):
     product_name = parameters['product_name']
     try:
@@ -143,7 +154,22 @@ tools = Tool(function_declarations=[
             }
         },
     ),
-   
+    FunctionDeclaration(
+        name="compare_average_unit_price",
+        description="Compare unit prices between two cities",
+        parameters={
+            "type": "object",
+            "properties": {
+                "cities": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of cities to compare"
+                }
+            }
+        },
+    ),
     FunctionDeclaration(
         name="compare_sales_value",
         description="Compare sales value between two cities",
@@ -191,6 +217,7 @@ tools = Tool(function_declarations=[
 # Dispatch table for function handling
 function_handlers = {
     "compare_sales_value": compare_sales_value,
+    "compare_average_unit_price": compare_average_unit_price,
     "average_unit_price_over_time": average_unit_price_over_time,
     "get_sales_over_time": get_sales_over_time,
     "overall_sales_summary": overall_sales_summary,

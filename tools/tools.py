@@ -52,8 +52,8 @@ market = MarketView(df.copy())
 # compare_result = comparison.compare_sales_value(['Abidjan', 'Bouake'])
 # print("Comparison of sales value: {}".format(compare_result))
 
-# overall_sales_summary = market.overall_sales_summary('ALYSSA  SPAGHETTI    200G SACHET')
-# print(overall_sales_summary)
+overall_sales_summary = market.overall_sales_summary('ALYSSA  SPAGHETTI    200G SACHET')
+print(overall_sales_summary)
 
 # vol_time = trends.sales_volume_over_time('ALYSSA  SPAGHETTI    200G SACHET')
 # print(vol_time)
@@ -64,5 +64,11 @@ market = MarketView(df.copy())
 # trend_by_period = trends.product_sales_trends("ALYSSA  SPAGHETTI    200G SACHET", "custom_month", month="January")
 # print(trend_by_period)
 
-top_perform = market.top_performing_products(top_n=1)
-print(top_perform)
+# top_perform = market.top_performing_products(top_n=1)
+# print(top_perform)
+
+# share_by_cat = market.market_share_by_category()
+# print(share_by_cat)
+
+comp_unit_prices = comparison.compare_unit_price(['Abidjan', 'Bouake'])
+print(comp_unit_prices)

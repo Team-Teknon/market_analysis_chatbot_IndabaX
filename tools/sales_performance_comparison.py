@@ -1,3 +1,5 @@
+import pandas as pd
+
 class SalesPerformanceComparison:
     """
     A class used to compare sales performance across different cities.
@@ -62,7 +64,7 @@ class SalesPerformanceComparison:
         sales_volume_comparison = city_data.groupby(['City', 'Period']).sum()['Sales_Volume(KG_LTRS)'].unstack()
         return sales_volume_comparison.to_dict()
 
-    def compare_unit_price(self, city_list):
+    def compare_average_unit_price(self, city_list):
         """
         Returns the average unit price comparison across the specified cities.
 
@@ -77,5 +79,19 @@ class SalesPerformanceComparison:
             Average unit price comparison across the specified cities.
         """
         city_data = self.data[self.data['City'].isin(city_list)]
-        unit_price_comparison = city_data.groupby(['City', 'Period']).mean()['Unit_Price'].unstack()
+    
+        # Ensure 'Unit_Price' column is numeric
+        city_data['Unit_Price'] = pd.to_numeric(city_data['Unit_Price'], errors='coerce')
+        
+        # Filter out rows where 'Unit_Price' is NaN
+        city_data = city_data.dropna(subset=['Unit_Price'])
+        
+        # Verify that 'Unit_Price' is now numeric
+        if not pd.api.types.is_numeric_dtype(city_data['Unit_Price']):
+            raise ValueError("Unit_Price column must contain numeric values only.")
+        
+        # Calculate the mean unit price comparison
+        unit_price_comparison = city_data.groupby(['City', 'Period'])['Unit_Price'].mean().unstack()
+        
         return unit_price_comparison.to_dict()
+
