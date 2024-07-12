@@ -24,9 +24,23 @@ market = MarketView(df.copy())
 def get_sales_over_time(parameters):
     product_name = parameters['product_name']
     result = trends.sales_over_time(product_name)
+
     if result is not None:
         result = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in result.items()}
         return {"sales_over_time": result}
+    else:
+        return {"error": "No data available"}
+
+
+# Function to Get Sales Volume Over Time
+def sales_volume_over_time(parameters):
+    product_name = parameters['product_name']
+    result = trends.sales_volume_over_time(product_name)
+    if result is not None:
+        # Convert Timestamp keys to string format
+        result = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in result.items()}
+        print(result)
+        return {"sales_volume_over_time": result}
     else:
         return {"error": "No data available"}
 
@@ -45,6 +59,21 @@ def compare_sales_value(parameters):
         return {"comparison": converted_result}
     else:
         return {"error": "No data available"}
+    
+
+def overall_sales_summary(parameters):
+    product_name = parameters['product_name']
+    try:
+        overall_summary = market.overall_sales_summary(product_name)
+        # Convert Timestamps to strings
+        overall_summary_converted = {}
+        for metric, values in overall_summary.items():
+            overall_summary_converted[metric] = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in values.items()}
+
+        # print(overall_summary_converted)
+        return {"overall_sales_summary": overall_summary_converted}
+    except Exception as e:
+        return {"error": str(e)}
 
 
 # Tools
@@ -63,6 +92,19 @@ tools = Tool(function_declarations=[
         },
     ),
     FunctionDeclaration(
+        name="sales_volume_over_time",
+        description="Get sales volume over time for a specific product",
+        parameters={
+            "type": "object",
+            "properties": {
+                "product_name": {
+                    "type": "string",
+                    "description": "Product name"
+                }
+            }
+        }
+    ),
+    FunctionDeclaration(
         name="compare_sales_value",
         description="Compare sales value between two cities",
         parameters={
@@ -78,12 +120,27 @@ tools = Tool(function_declarations=[
             }
         },
     ),
+    FunctionDeclaration(
+        name="overall_sales_summary",
+        description="Get overall sales summary over time",
+        parameters={
+            "type": "object",
+            "properties": {
+                "product_name": {
+                    "type": "string",
+                    "description": "Product name"
+                }
+            }
+        },
+    )
 ])
 
 # Dispatch table for function handling
 function_handlers = {
     "compare_sales_value": compare_sales_value,
-    "get_sales_over_time": get_sales_over_time
+    "get_sales_over_time": get_sales_over_time,
+    "sales_volume_over_time": sales_volume_over_time,
+    "overall_sales_summary": overall_sales_summary,
 }
 
 # Model Initialization

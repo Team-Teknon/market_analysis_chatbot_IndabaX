@@ -30,16 +30,27 @@ class MarketView:
         """
         self.data = data
 
-    def overall_sales_summary(self):
+    def overall_sales_summary(self, product_name):
         """
-        Returns the overall sales summary over time.
+        Returns the overall sales summary for a product over time.
+
+        Parameters
+        ----------
+        product_name : str
+            The name of the product to filter the data.
 
         Returns
         -------
         dict
             Overall sales summary over time.
         """
-        overall_summary = self.data.groupby('Period').sum()[['Sales_Value', 'Sales_Volume(KG_LTRS)']]
+        # Filter the data for the specified product
+        product_data = self.data[self.data['Item Name'] == product_name]
+        
+        # Group by 'Period' and sum the sales value and volume
+        overall_summary = product_data.groupby('Period').sum()[['Sales_Value', 'Sales_Volume(KG_LTRS)']]
+        
+        # Convert the summary to a dictionary
         return overall_summary.to_dict()
     
     def top_performing_products(self, top_n=10):
