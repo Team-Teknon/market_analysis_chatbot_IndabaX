@@ -52,9 +52,9 @@ Here's a step-by-step procedure to get your chatbot-powered data analysis tool r
      ```
 
 5. **Run the Streamlit App**:
-   - Start the Streamlit app using the `streamlit run` command followed by the name of your main Python script (e.g., `app.py`).
+   - Start the Streamlit app using the `streamlit run` command followed by the name of your main Python script (e.g., `main.py`).
      ```sh
-     streamlit run app.py
+     streamlit run main.py
      ```
 
 6. **Access the App in a Web Browser**:
