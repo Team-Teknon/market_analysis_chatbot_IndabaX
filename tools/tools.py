@@ -24,6 +24,8 @@ market = MarketView(df.copy())
 # compare_result = comparison.compare_sales_value(['Abidjan', 'Bouake'])
 # print("Comparison of sales value: {}".format(compare_result))
 
-overall_sales_summary = market.overall_sales_summary('ALYSSA  SPAGHETTI    200G SACHET')
-print(overall_sales_summary)
+# overall_sales_summary = market.overall_sales_summary('ALYSSA  SPAGHETTI    200G SACHET')
+# print(overall_sales_summary)
 
+vol_time = trends.sales_volume_over_time('ALYSSA  SPAGHETTI    200G SACHET')
+print(vol_time)
