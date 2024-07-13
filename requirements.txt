@@ -44,12 +44,6 @@ jsonpatch==1.33
 jsonpointer==3.0.0
 jsonschema==4.22.0
 jsonschema-specifications==2023.12.1
-langchain==0.2.6
-langchain-community==0.2.6
-langchain-core==0.2.11
-langchain-openai==0.1.14
-langchain-text-splitters==0.2.2
-langsmith==0.1.83
 lxml==5.2.2
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
@@ -107,7 +101,4 @@ urllib3==2.2.2
 vertexai==1.49.0
 watchdog==4.0.1
 webencodings==0.5.1
-wikipedia==1.4.0
 yarl==1.9.4
-yfinance==0.2.40
-scikit-learn==1.5.1

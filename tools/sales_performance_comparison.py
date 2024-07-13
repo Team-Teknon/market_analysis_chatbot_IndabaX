@@ -1,3 +1,5 @@
+import pandas as pd
+
 class SalesPerformanceComparison:
     """
     A class used to compare sales performance across different cities.
@@ -62,7 +64,7 @@ class SalesPerformanceComparison:
         sales_volume_comparison = city_data.groupby(['City', 'Period']).sum()['Sales_Volume(KG_LTRS)'].unstack()
         return sales_volume_comparison.to_dict()
 
-    def compare_unit_price(self, city_list):
+    def compare_average_unit_price(self, city_list):
         """
         Returns the average unit price comparison across the specified cities.
 
@@ -182,4 +184,6 @@ class SalesPerformanceComparison:
 
         # Filter to return only the results for the specified cities
         return highest_volume_packaging.loc[city_list].to_dict()
+
+
 

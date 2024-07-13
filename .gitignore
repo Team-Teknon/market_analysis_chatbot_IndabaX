@@ -1,3 +1,6 @@
 .idea/
 tools/__pycache__
 __pycache__/
+myenv/
+data/transformed_dummy_dataset.xlsx
+app.py
