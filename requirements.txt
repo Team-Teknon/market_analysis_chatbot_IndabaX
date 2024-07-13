@@ -102,4 +102,3 @@ vertexai==1.49.0
 watchdog==4.0.1
 webencodings==0.5.1
 yarl==1.9.4
-yfinance==0.2.40
