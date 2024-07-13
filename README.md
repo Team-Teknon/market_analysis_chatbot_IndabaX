@@ -16,7 +16,7 @@ Here's a step-by-step procedure to get your chatbot-powered data analysis tool r
 1. **Clone the Repository or Download the Code**:
    - If your project is hosted on a version control platform like GitHub, clone the repository.
      ```sh
-     git clone https://github.com/yourusername/yourrepository.git
+     git clone https://github.com/tettey-exploits/market_analysis_chatbot_IndabaX.git
      ```
    - Alternatively, download the project files and extract them to your desired location.
 
