@@ -60,7 +60,7 @@ Here's a step-by-step procedure to get your chatbot-powered data analysis tool r
 
 ```sh
 # Step 1: Clone the repository
-git clone https://github.com/yourusername/yourrepository.git
+git clone https://github.com/tettey-exploits/market_analysis_chatbot_IndabaX.git
 
 # Step 2: Navigate to the project directory
 cd path/to/your/project
