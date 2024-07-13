@@ -1,5 +1,9 @@
-# market_analysis_chatbot_IndabaX
-A prototype of a data analysis tool on market performance
+# market_analysis_chatbot_IndabaX - Hackathon Challenge#1
+| <img src="https://github.com/tettey-exploits/market_analysis_chatbot_IndabaX/blob/main/Screenshot%20from%202024-07-13%2000-37-24.png?raw=true"> |
+|:--:| 
+| *A Prototype of A Data Analysis Tool for Market Performance* |
+
+
 
 Here's a step-by-step procedure to get your chatbot-powered data analysis tool running on a local machine:
 
