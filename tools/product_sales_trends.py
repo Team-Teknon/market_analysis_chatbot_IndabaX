@@ -1,3 +1,4 @@
+import random
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
@@ -34,13 +35,14 @@ class ProductSalesTrends:
         self.data['Week'] = self.data['Period'].dt.to_period('W')
         self.data['Season'] = self.data['Period'].dt.month % 12 // 3 + 1
 
-    def sales_over_time(self, product_name):
+    def sales_over_time(self, product_names, city):
         """
         Returns the sales value over time for the specified product.
 
         Parameters
         ----------
-        product_name : str
+        city
+        product_names : list
             The name of the product to analyze.
 
         Returns
@@ -48,10 +50,37 @@ class ProductSalesTrends:
         dict
             Sales value over time for the specified product.
         """
+        product_sales_over_time_info = {}
+        if isinstance(product_names, str):
+            product_names = [product_names]
 
-        product_data = self.data[self.data['Item Name'] == product_name]
-        sales_over_time = product_data.groupby('Period')['Sales_Value'].sum()
-        return sales_over_time.to_dict()
+        all_products = False
+        for product_name in product_names:
+            if product_name == "all products":
+                all_products = True
+                product_sales_over_time_info[product_name] = self.data
+            elif product_name == "some products":
+                some_products = random.sample(list(self.data['Item Name'].unique()), 5)
+                for product in some_products:
+                    product_sales_over_time_info[product] = self.data[self.data['Item Name'] == product]
+            else:
+                product_sales_over_time_info[product_name] = self.data[self.data['Item Name'] == product_name]
+
+        for product_name, product_data in product_sales_over_time_info.items():
+            # Filter rows where a column matches a certain value
+            if city != "all cities":
+                product_data = product_data[product_data['City'] == city]
+
+            # Sum up the sales values grouped by 'Period' and convert to dictionary
+            product_sales_over_time_info[product_name] = product_data.groupby('Period')['Sales_Value'].sum().to_dict()
+
+        note = ""
+        if city == "all cities":
+            note += "The data reveals general trends in all cities and does not conform to any particular city."
+        if all_products:
+            note += "The data reveals general trends in all products and does not conform to any particular product."
+
+        return product_sales_over_time_info, note
 
     def sales_volume_over_time(self, product_name):
         """

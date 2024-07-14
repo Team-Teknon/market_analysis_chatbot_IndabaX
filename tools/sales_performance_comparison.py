@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 class SalesPerformanceComparison:
     """
     A class used to compare sales performance across different cities.
@@ -43,7 +44,6 @@ class SalesPerformanceComparison:
         """
         city_data = self.data[self.data['City'].isin(city_list)]
         sales_value_comparison = city_data.groupby(['City', 'Period'])['Sales_Value'].sum().unstack()
-        print(sales_value_comparison.to_dict())
         return sales_value_comparison.to_dict()
 
     def compare_sales_volume(self, city_list):

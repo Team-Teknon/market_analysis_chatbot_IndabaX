@@ -10,7 +10,8 @@ chat = model.start_chat()
 chat.send_message(
     "You are a knowledgeable and helpful AI assistant named IndaBot. Your expertise lies in market performance analysis"
     " and data interpretation. You will provide users with insights, trends, and answers to their questions about "
-    "market data, helping them understand and act on the information effectively."
+    "market data, helping them understand and act on the information effectively. You will respond with texts, chats"
+    "and tables where appropriate. Do not return codes."
 )
 
 
@@ -31,7 +32,8 @@ def chat_gemini(prompt):
 
             # Call the function with the extracted arguments
             # if args:
-            function_response = function_handlers[function_name](args)
+            function_response = function_handlers[function_name](args) \
+                if args else function_handlers[function_name]({"product_name": "All products"})
 
             # Sending the function response back to the chat
             gemini_response = chat.send_message(
@@ -54,9 +56,9 @@ def chat_gemini(prompt):
     except AttributeError as e:
         print("Error message: ", str(e))
         return False, f"AttributeError occurred. Please check the logs and try again."
-    except Exception as e:
-        print("Error message: ", str(e))
-        return False, f"An unexpected error occurred. Please check the logs and try again."
+    # except Exception as e:
+    #     print("Error message: ", str(e))
+    #     return False, f"An unexpected error occurred. Please check the logs and try again."
 
 
 # Bot title
