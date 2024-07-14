@@ -53,6 +53,10 @@ Here's a step-by-step procedure to get your chatbot-powered data analysis tool r
 
 5. **Set the environment variable**:
   - Set the environment variable GOOGLE_APPLICATION_CREDENTIALS to the path of the JSON file that contains your credentials. This variable applies only to your current shell session, so if you open a new session, set the variable again.
+  Download the file at:
+  ```sh
+  https://drive.google.com/file/d/1cvBwGpmAljXn6A0urgpm--GEyBBGCZUt/view?usp=sharing
+  ```
   - Linux or macOS:
     ```sh
     export GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-1792e1acf49f.json"
