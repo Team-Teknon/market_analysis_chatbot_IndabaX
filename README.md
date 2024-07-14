@@ -13,7 +13,7 @@ Here's a step-by-step procedure to get your chatbot-powered data analysis tool r
    ```sh
    pip install streamlit
    ```
-3. **Setup Google Cloud**: Please follow this tutorial: https://cloud.google.com/sdk/docs/install. When promted, the name of the project is `farmnets-try`. Select it among the list of options and proceed.
+<!-- 3. **Setup Google Cloud**: Please follow this tutorial: https://cloud.google.com/sdk/docs/install. When promted, the name of the project is `farmnets-try`. Select it among the list of options and proceed. -->
 
 ### Procedure
 
@@ -46,17 +46,17 @@ Here's a step-by-step procedure to get your chatbot-powered data analysis tool r
        ```
 
 4. **Install Required Dependencies**:
-   - Install all required dependencies using pip. If you have a `requirements.txt` file, use it to install dependencies.
-     ```sh
-     pip install -r requirements.txt
-     ```
+  - Install all required dependencies using pip. If you have a `requirements.txt` file, use it to install dependencies.
+    ```sh
+    pip install -r requirements.txt
+    ```
 
 5. **Set the environment variable**:
   - Set the environment variable GOOGLE_APPLICATION_CREDENTIALS to the path of the JSON file that contains your credentials. This variable applies only to your current shell session, so if you open a new session, set the variable again.
   Download the file at:
-  ```sh
-  https://drive.google.com/file/d/1cvBwGpmAljXn6A0urgpm--GEyBBGCZUt/view?usp=sharing
-  ```
+    ```sh
+    https://drive.google.com/file/d/1cvBwGpmAljXn6A0urgpm--GEyBBGCZUt/view?usp=sharing
+    ```
   - Linux or macOS:
     ```sh
     export GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-46d4bbb04e15.json"
