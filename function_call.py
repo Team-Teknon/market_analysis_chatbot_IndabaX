@@ -1,6 +1,4 @@
-from tools.product_sales_trends import ProductSalesTrends
-from tools.sales_performance_comparison import SalesPerformanceComparison
-from tools.market_view import MarketView
+import vertexai.preview
 from vertexai.preview.generative_models import (
     GenerativeModel,
     Part,
@@ -8,9 +6,15 @@ from vertexai.preview.generative_models import (
     FunctionDeclaration,
     Tool,
 )
+from tools.product_sales_trends import ProductSalesTrends
+from tools.sales_performance_comparison import SalesPerformanceComparison
+from tools.market_view import MarketView
 from setup import *
 
+
 df = load_data()  # load data
+vertexai.init(project="farmnets-try")
+
 
 # Create instances of each class
 trends = ProductSalesTrends(df.copy())

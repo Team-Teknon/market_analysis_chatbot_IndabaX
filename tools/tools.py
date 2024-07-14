@@ -70,5 +70,5 @@ print(overall_sales_summary)
 # share_by_cat = market.market_share_by_category()
 # print(share_by_cat)
 
-comp_unit_prices = comparison.compare_unit_price(['Abidjan', 'Bouake'])
-print(comp_unit_prices)
+# comp_unit_prices = comparison.compare_unit_price(['Abidjan', 'Bouake'])
+# print(comp_unit_prices)

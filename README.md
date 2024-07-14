@@ -51,13 +51,30 @@ Here's a step-by-step procedure to get your chatbot-powered data analysis tool r
      pip install -r requirements.txt
      ```
 
-5. **Run the Streamlit App**:
+5. **Set the environment variable**:
+  - Set the environment variable GOOGLE_APPLICATION_CREDENTIALS to the path of the JSON file that contains your credentials. This variable applies only to your current shell session, so if you open a new session, set the variable again.
+  - Linux or macOS:
+    ```sh
+    export GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-1792e1acf49f.json"
+    ```
+  - Windows:
+    - For PowerShell:
+    ```sh
+    $env:GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-1792e1acf49f.json"
+    ```
+    - For command prompt:
+    ```sh
+    set GOOGLE_APPLICATION_CREDENTIALS=Kfarmnets-try-1792e1acf49f.json
+    ```
+
+
+6. **Run the Streamlit App**:
    - Start the Streamlit app using the `streamlit run` command followed by the name of your main Python script (e.g., `main.py`).
      ```sh
      streamlit run main.py
      ```
 
-6. **Access the App in a Web Browser**:
+7. **Access the App in a Web Browser**:
    - Once the app is running, Streamlit will provide a local URL (typically `http://localhost:8501`). Open this URL in a web browser to access your chatbot-powered data analysis tool.
 
 ### Example Command Summary
@@ -77,6 +94,9 @@ source myenv/bin/activate  # On macOS/Linux
 # Step 4: Install required dependencies
 pip install -r requirements.txt
 
-# Step 5: Run the Streamlit app
+# Step 5: Set the environment variable
+export GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-1792e1acf49f.json"
+
+# Step 6: Run the Streamlit app
 streamlit run main.py
 ```

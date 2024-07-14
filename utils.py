@@ -8,7 +8,7 @@ def load_data():
     try:
         df = pd.read_excel("data/transformed_dummy_dataset.xlsx")
     except FileNotFoundError:
-        print(f"Transformed data not found, starting new operation")
+        print("Transformed data not found, starting new operation")
         df = pd.read_excel('data/dummy_dataset.xlsx', sheet_name='Database')
 
         for column in df.columns:
