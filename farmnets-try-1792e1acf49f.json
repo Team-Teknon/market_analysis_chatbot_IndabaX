@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "farmnets-try",
+  "private_key_id": "1792e1acf49f099d9e31bbc28c0599992b92d7af",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDvXxLmn0XKNBqE\n02q8aiR/UjPMMGjm+po+7d//9X5j9KD2+fwi27uHIRP9rUHn/cHZQp3cDuqhBvGp\nfk94NTdsSun6V2dszCKxUxsm1wOF+1SP0bOYzTxEXe1Mgd6uzzZ0Xk+nO9N7v5jw\n//haLrXmljqI2k4JoElESt/mj3ZeeDs/0vvfw/Ng12lVCvDpITl1rAn1LGPBjJoF\nb+cjjvimGkEJK0M0o3IoCrNvH93ps5oN+mJbm4lWCQUzTxt7tXFs/JDhBnSSlH1T\nw5OKCJ2/FzKPO/xPSmnVHXzpT0ecAfTbriMLgCtkw9TUnklWkoaoRK91HKwwhFVV\n0Kgm1gr/AgMBAAECggEAA6TZNHo6OsDI9+VWsPWWBqYpXwi29W/dMethxz4P0Cpk\n2j2l+/XdCJ/qnlL+jNniaJHzYJU4NylUO8tOHxCtqPq0Tc5PfGrYdbCZL4yDDjgW\n6nWRHANhJn1I49WaSTj4UD8woTrE675X8AXwMZdCckyD1ETWfp5aXy1wnnbn9g+A\n9dSUBx9TOcHyvdz1qXrSJfgVD6NZFqi5WHbZNYM6gfMMgOA/cAzvAvWIpVSceIh1\na18GLN2zyZuIh0cz9BBmCzOsXFJb/NfaHNNcKje1SYI/oe+VZHdIBXVfoWCiqbuj\np8m4nVqJJShhcDlhw0eanqT/fSOOtb1JPad+AqBv0QKBgQD6Z1J53H96ht+n6Olk\nHuQSB3k2HBxy9BY3RTX1Jadgp3s1RAvqiM/uO+xWYoAM6qRZ1wuGdvpj9CShJ4bg\n0ILjqZ0gA39/GhywVVD5mLJaCV07kS68s5tLXtpIbj3sy7jYZnKM+6pvBOHluYkn\nJPqMi1tp9d1yLS2eHOk7jP4O6QKBgQD0uKGPWOGBucNIA5nYdZvDaS2wFNSQv0/l\nDgLyJ9/j/Np174ZrJ8DwUe8UYZP6cVmBby93l1bSQBwflSGjHxb8CDbBAs5MqYT7\n8t1vMvkpI5WTuhVKM5az3oLner400/iyM7QVkn2YL+9LlS8jkEUfFb0wFCXctLwp\nrjz1Kp8ppwKBgQDQsh52PETu/MwZKLCkZm6VbC8k3ucDE9YUOJXQ/JH0p4GzkkQQ\nM/iAyOaf1LZ+jW1vByCu8Cid99QzkDsE0iPU1P+EuAWiDERO3rx/WjmDevx+cfEv\nCs5qUeLBrUflPKGRkkj0oaeZocsYaLsbqeE8E8WbmXP3/hlgBx6IKGlySQKBgQD0\nLRDOxeFkHeTygt1LdLWxec2jZnVd4/Wk16Eq24xyoEWd7RvS6TyCzU3eqSoMdnLX\nSggzrGZtrJgjDxsb9pZpbQys8s7DAVX2SjKVlGe1m5LQbph1jBnvaLJ2oysL7QC1\nVg92gs8cPZ/na3g4ZOgDBx7YzRGmMROaBwc9nIRo+wKBgQDEBeVqSE/0iErAHN/1\n3aFdWrkzz1ld+Q6PDSTQg76Mw9FEKykloexvnPzZovAkVxRSjax9cVj0+8KQlKww\nj2UfGpTG+7QPW6XSAMDlsPfhcdIWfZCTR8SEWv0d6QjChJ5+AYwd4J1v6JqTlR9y\nOgEMocW8zGKXroye/Zs250ZG8A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "indabax-dataanlysis-chatbot@farmnets-try.iam.gserviceaccount.com",
+  "client_id": "106250164552059578278",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/indabax-dataanlysis-chatbot%40farmnets-try.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
