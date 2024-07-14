@@ -20,14 +20,15 @@ market = MarketView(df.copy())
 
 # Function to Get Sales Over Time
 def get_sales_over_time(parameters):
-    product_name = parameters['product_name']
-    result = trends.sales_over_time(transform_data(product_name))
-
-    # print(result)
+    product_name = parameters['product_names']
+    city = parameters['city']
+    result, note = trends.sales_over_time(transform_data(product_name), transform_data(city))
 
     if result is not None:
-        result = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v for k, v in result.items()}
-        return {"sales_over_time": result}
+        for product_name, sales_trend in result.items():
+            result[product_name] = {k.strftime('%Y-%m-%d %H:%M:%S') if isinstance(k, pd.Timestamp) else k: v
+                                    for k, v in sales_trend.items()}
+        return {"sales_over_time": result, "important note": note}
     else:
         return {"error": "No data available"}
 
@@ -101,18 +102,29 @@ def top_performing_products(parameters):
 tools = Tool(function_declarations=[
     FunctionDeclaration(
         name="get_sales_over_time",
-        description="Get sales over time for a specific product",
+        description="Get sales over time for specific products, all products, or randomly selected products in a city "
+                    "or all cities",
         parameters={
             "type": "object",
             "properties": {
-                "product_name": {
+                "product_names": {
+                    "type": "array",
+                    "description": "A list containing either one of the following: 'All products' to get sales for "
+                                   "all products, or 'Some products' to get sales for randomly selected products; or "
+                                   "is an array of product names."
+,
+                    "default": ["All products"],
+                },
+                "city": {
                     "type": "string",
-                    "description": "Product name"
+                    "description": "The name of a single city, or 'All cities' to get sales in all "
+                                   "cities",
+                    "default": "All cities",
                 }
-            }
-        },
+            },
+            "required": ["product_names", "city"]
+        }
     ),
-
     FunctionDeclaration(
         name="average_unit_price_over_time",
         description="Get average unit price over time for a specific product",

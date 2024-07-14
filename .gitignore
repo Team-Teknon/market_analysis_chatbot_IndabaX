@@ -4,3 +4,5 @@ __pycache__/
 myenv/
 data/transformed_dummy_dataset.xlsx
 app.py
+data/.~data_analysis_queries.xlsx
+data/.~dummy_dataset.xlsx
