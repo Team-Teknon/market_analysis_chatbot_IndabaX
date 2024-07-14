@@ -59,16 +59,16 @@ Here's a step-by-step procedure to get your chatbot-powered data analysis tool r
   ```
   - Linux or macOS:
     ```sh
-    export GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-1792e1acf49f.json"
+    export GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-46d4bbb04e15.json"
     ```
   - Windows:
     - For PowerShell:
     ```sh
-    $env:GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-1792e1acf49f.json"
+    $env:GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-46d4bbb04e15.json"
     ```
     - For command prompt:
     ```sh
-    set GOOGLE_APPLICATION_CREDENTIALS=Kfarmnets-try-1792e1acf49f.json
+    set GOOGLE_APPLICATION_CREDENTIALS=farmnets-try-46d4bbb04e15.json
     ```
 
 
