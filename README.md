@@ -57,18 +57,22 @@ Here's a step-by-step procedure to get your chatbot-powered data analysis tool r
     ```sh
     https://drive.google.com/file/d/1cvBwGpmAljXn6A0urgpm--GEyBBGCZUt/view?usp=sharing
     ```
+    Replace ```KEY_PATH``` with the path of the JSON file that contains your credentials.
   - Linux or macOS:
     ```sh
-    export GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-46d4bbb04e15.json"
+    export GOOGLE_APPLICATION_CREDENTIALS="KEY_PATH"
+    export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/market_analysis_chatbot_IndabaX/farmnets-try-46d4bbb04e15.json"
     ```
   - Windows:
     - For PowerShell:
     ```sh
-    $env:GOOGLE_APPLICATION_CREDENTIALS="farmnets-try-46d4bbb04e15.json"
+    $env:GOOGLE_APPLICATION_CREDENTIALS="KEY_PATH"
+    $env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\virt\Desktop\market_analysis_chatbot_IndabaX\farmnets-try-46d4bbb04e15.json"
     ```
     - For command prompt:
     ```sh
-    set GOOGLE_APPLICATION_CREDENTIALS=farmnets-try-46d4bbb04e15.json
+    set GOOGLE_APPLICATION_CREDENTIALS=KEY_PATH
+    set GOOGLE_APPLICATION_CREDENTIALS=C:\\Users\\virt\\Desktop\\market_analysis_chatbot_IndabaX\\farmnets-try-46d4bbb04e15.json
     ```
 
 
